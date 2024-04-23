@@ -1,11 +1,24 @@
-export default function InputForm() {
+export default function InputForm({ itemName, setItemName, onAddItem })  {
+
+    const handleChange = (e) => {
+        setItemName(e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onAddItem();
+    };
+
+
     return (
-        <form className="flex rounded-lg overflow-hidden">
+        <form onSubmit={handleSubmit} className="flex rounded-lg overflow-hidden">
             <input
                 placeholder="What would you like to pack?"
                 type="text"
+                value={itemName}
+                onChange={handleChange}
                 className="flex-1 p-4 bg-neutral-200 focus:bg-neutral-300/90 transition-all outline-none"
-                defaultValue="Something"
+                
             />
             <button
                 type="submit"

@@ -1,25 +1,27 @@
-export default function CategoryButtonList() {
+import { useState } from "react";
+
+export default function CategoryButtonList({ onSelectedCategory }) {
+
+    const [selectedCategory, setSelectedCategory] = useState('Documents');
+
+    const handleCategoryClick = (category) => {
+        setSelectedCategory(category)
+        onSelectedCategory(category);
+    };
     return (
-        <div className="flex gap-2 items-center mb-2">Category:{" "}
+        <div className="flex gap-2 items-center mb-2">
+        Category:{" "}
+        {['Documents', 'Clothes', 'Camping gear', 'Toiletry'].map((category) => (
             <button
+                key={category}
                 type="button"
-                className="transition border border-blue-500 bg-blue-500 text-blue-100 px-4 py-1 rounded-full">Documents
+                className={`transition border ${
+                selectedCategory === category ? 'border-blue-500 bg-blue-500 text-blue-100' : 'border-neutral-200 text-neutral-500'} px-4 py-1 rounded-full`}
+                onClick={() => handleCategoryClick(category)}
+            >
+            {category}
             </button>
-
-            <button
-                type="button"
-                className="transition border border-neutral-200 text-neutral-500 px-4 py-1 rounded-full">Clothes
-            </button>
-
-            <button
-                type="button"
-                className="transition border border-neutral-200 text-neutral-500 px-4 py-1 rounded-full">Camping gear
-            </button>
-
-            <button
-                type="button"
-                className="transition border border-neutral-200 text-neutral-500 px-4 py-1 rounded-full">Toiletry
-            </button>
-        </div>
+        ))}
+    </div>
     )
 }
