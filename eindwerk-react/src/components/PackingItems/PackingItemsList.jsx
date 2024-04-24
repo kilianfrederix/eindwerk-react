@@ -1,9 +1,10 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import PackingCategory from "./PackingCategory";
 import PackingHeader from "./PackingHeader";
 import PackingItems from "./PackingItems";
 
-export default function PackingItemsList({ items, setItems, areFiltersApplied }) {
+export default function PackingItemsList({ items, setItems, areFiltersApplied, onTogglePacked }) {
+
     const [selectedCategory , setSelectedCategory] = useState('');
 
     const handleSelectCategory = (category) => {
@@ -15,10 +16,12 @@ export default function PackingItemsList({ items, setItems, areFiltersApplied })
     };
 
     const handleRemoveAllItems = () => {
-        setItems([])
+        const filteredItems = items.filter((item) => item.packed);
+        console.log('Filtered Items:', filteredItems);
+        setItems(filteredItems);
     };
 
-    
+
 
     const filteredItems = selectedCategory
     ? items.filter((item) => item.category === selectedCategory)
@@ -27,16 +30,19 @@ export default function PackingItemsList({ items, setItems, areFiltersApplied })
     return (
         <div>
             <PackingHeader 
-                onClearFilters={handleClearFilters}
                 onRemoveAllItems={handleRemoveAllItems}
+                onClearFilters={handleClearFilters}
                 areFiltersApplied={areFiltersApplied}
             />
+
+
             <PackingCategory 
                 onSelectedcategory={handleSelectCategory}
             />
             <PackingItems 
                 items={filteredItems}
                 setItems={setItems}
+                onTogglePacked={onTogglePacked}
             />
         </div>
     )

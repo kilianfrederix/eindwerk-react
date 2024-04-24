@@ -1,4 +1,9 @@
-export default function PackedCategory  () {
+export default function PackedCategory  ({ onSelectedcategory }) {
+
+    const handleCategoryClick = (category) => {
+            onSelectedcategory(category);
+        };
+
     return (
         <div
             style={{ opacity: 1, pointerEvents: "all" }}
@@ -20,24 +25,28 @@ export default function PackedCategory  () {
                 <button
                     type="button"
                     className="transition-all px-4 py-1 rounded-full text-sm bg-neutral-300 hover:bg-neutral-400/70"
+                    onClick={() => handleCategoryClick('Documents')}
                 >
                     Documents
                 </button>
                 <button
                     type="button"
                     className="transition-all px-4 py-1 rounded-full text-sm bg-neutral-300 hover:bg-neutral-400/70"
+                    onClick={() => handleCategoryClick('Clothes')}
                 >
                     Clothes
                 </button>
                 <button
                     type="button"
                     className="transition-all px-4 py-1 rounded-full text-sm bg-neutral-300 hover:bg-neutral-400/70"
+                    onClick={() => handleCategoryClick('Camping gear')}
                 >
                     Camping gear
                 </button>
                 <button
                     type="button"
                     className="transition-all px-4 py-1 rounded-full text-sm bg-neutral-300 hover:bg-neutral-400/70"
+                    onClick={() => handleCategoryClick('Toiletry')}
                 >
                     Toiletry
                 </button>

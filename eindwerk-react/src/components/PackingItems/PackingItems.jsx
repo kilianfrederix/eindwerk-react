@@ -1,16 +1,7 @@
-import React from 'react';
-
-export default function PackingItems({ items, setItems }) {
+export default function PackingItems({ items, setItems, onTogglePacked }) {
 
     const handleRemoveItem = (itemId) => {
         const updatedItems = items.filter((item) => item.id !== itemId);
-        setItems(updatedItems);
-    };
-
-    const handleTogglePacked = (itemId) => {
-        const updatedItems = items.map((item) =>
-        item.id === itemId ? { ...item, packed: !item.packed } : item
-        );
         setItems(updatedItems);
     };
 
@@ -33,7 +24,7 @@ export default function PackingItems({ items, setItems }) {
                     </div>
                     <button
                     className="bg-blue-500 hover:bg-blue-600 transition-all text-blue-100 p-4"
-                    onClick={() => handleTogglePacked(item.id)}
+                    onClick={() => onTogglePacked(item.id)}
                     >
                     Pack
                     </button>

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function CategoryButtonList({ onSelectedCategory }) {
 
-    const [selectedCategory, setSelectedCategory] = useState('Documents');
+    const [selectedCategory, setSelectedCategory] = useState('');
 
     const handleCategoryClick = (category) => {
         setSelectedCategory(category)

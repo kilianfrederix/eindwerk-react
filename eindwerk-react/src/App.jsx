@@ -1,14 +1,13 @@
+import React, { useState } from 'react';
 import './App.css';
 import InputForm from './components/InputForm';
 import CategoryButtonList from './components/CategoryButtonList';
 import PackingItemsList from './components/PackingItems/PackingItemsList';
 import PackedItemsList from './components/PackedItems/PackedItemsList';
-import { useState } from 'react';
 
 function App() {
-
   const [items, setItems] = useState([]);
-  const [itemName, setItemName] =useState('');
+  const [itemName, setItemName] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
 
   const handleAddItem = () => {
@@ -19,12 +18,34 @@ function App() {
       id: crypto.randomUUID(),
       name: itemName,
       category: selectedCategory,
-      packed: false
+      packed: false 
     };
+    console.log(items)
     setItems([...items, newItem]);
     setItemName('');
     setSelectedCategory('');
-  }
+  };
+
+  const handleTogglePacked = (itemId) => {
+  const updatedItems = items.map((item) => {
+    if (item.id === itemId) {
+      const updatedItem = { ...item, packed: !item.packed };
+
+      if (updatedItem.packed) {
+        return { ...updatedItem, packed: true };
+      } else {
+        return { ...updatedItem, packed: false };
+      }
+    }
+    return item;
+  });
+
+
+  setItems(updatedItems);
+};
+
+
+
 
   const areFiltersApplied = !selectedCategory;
 
@@ -33,25 +54,27 @@ function App() {
       <div className="max-w-[1100px] mx-auto py-8">
         <h1 className="mb-4 text-4xl font-bold">Packing list</h1>
         <div className="my-8">
-          <CategoryButtonList 
+          <CategoryButtonList
             onSelectedCategory={setSelectedCategory}
             areFiltersApplied={areFiltersApplied}
           />
-
-
-          <InputForm 
+          <InputForm
             itemName={itemName}
             setItemName={setItemName}
             onAddItem={handleAddItem}
           />
         </div>
-        <div className="grid grid-cols-2 gap-4 mt-12 transition ">
-          <PackingItemsList 
-            items={items}
+        <div className="grid grid-cols-2 gap-4 mt-12 transition">
+          <PackingItemsList
+            items={items.filter((item) => !item.packed)}
             setItems={setItems}
+            onTogglePacked={handleTogglePacked}
           />
-          
-          <PackedItemsList />
+          <PackedItemsList
+            items={items.filter((item) => item.packed)}
+            setItems={setItems}
+            onTogglePacked={handleTogglePacked}
+          />
         </div>
       </div>
     </div>
@@ -59,3 +82,6 @@ function App() {
 }
 
 export default App;
+
+
+
