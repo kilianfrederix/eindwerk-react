@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function PackedHeader({ onRemovePackedItems , onClearFilters, areFiltersApplied }) {
-  const handleRemovePackedItems = () => {
-    onRemovePackedItems(); 
+export default function PackedHeader({ onClearFilters, areFiltersApplied, removePackedItems }) {
+  const handleRemoveItems = () => {
+    removePackedItems(); // Roep de functie aan om alle ingepakte items te verwijderen
   };
 
   return (
@@ -10,8 +10,8 @@ export default function PackedHeader({ onRemovePackedItems , onClearFilters, are
       <h2 className="font-bold text-2xl">Packed items</h2>
       <div className="flex gap-2">
         <button
-          className="bg-blue-500 text-blue-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all rounded-lg px-2 py-1"
-          onClick={handleRemovePackedItems}
+          className="bg-blue-500 text-blue-100 rounded-lg px-2 py-1"
+          onClick={handleRemoveItems}
         >
           Remove all items
         </button>
@@ -28,6 +28,7 @@ export default function PackedHeader({ onRemovePackedItems , onClearFilters, are
     </header>
   );
 }
+
 
 
 

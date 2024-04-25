@@ -3,7 +3,7 @@ import PackedCategory from './PackedCategory';
 import PackedItems from './PackedItems';
 import { useState } from 'react';
 
-export default function PackedItemsList({ items, setItems, areFiltersApplied, onTogglePacked }) {
+export default function PackedItemsList({ items, setItems, areFiltersApplied, onTogglePacked, removePackedItems }) {
   const [selectedCategory, setSelectedCategory] = useState('');
 
   const handleSelectCategory = (category) => {
@@ -14,13 +14,6 @@ export default function PackedItemsList({ items, setItems, areFiltersApplied, on
     setSelectedCategory('');
   };
 
-  const handleRemovePackedItems = () => {
-    const filteredItems = items.filter((item) => !item.packed);
-    console.log('Filtered Items:', filteredItems);
-    setItems(filteredItems);
-  };
-
-
   const filteredItems = selectedCategory
     ? items.filter((item) => item.category === selectedCategory)
     : items;
@@ -28,7 +21,7 @@ export default function PackedItemsList({ items, setItems, areFiltersApplied, on
   return (
     <div>
       <PackedHeader
-      onRemovePackedItems={handleRemovePackedItems}
+      removePackedItems={removePackedItems}
       onClearFilters={handleClearFilters}
       areFiltersApplied={areFiltersApplied}
     />

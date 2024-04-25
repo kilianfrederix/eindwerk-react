@@ -10,6 +10,7 @@ function App() {
   const [itemName, setItemName] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
 
+  // Functie om een nieuw item toe te voegen aan de lijst
   const handleAddItem = () => {
     if (!itemName.trim() || !selectedCategory) {
       return;
@@ -18,34 +19,30 @@ function App() {
       id: crypto.randomUUID(),
       name: itemName,
       category: selectedCategory,
-      packed: false 
+      packed: false,
     };
-    console.log(items)
     setItems([...items, newItem]);
     setItemName('');
     setSelectedCategory('');
   };
 
+  // Functie om de 'packed' status van een item te togglen
   const handleTogglePacked = (itemId) => {
-  const updatedItems = items.map((item) => {
-    if (item.id === itemId) {
-      const updatedItem = { ...item, packed: !item.packed };
+    const updatedItems = items.map((item) =>
+      item.id === itemId ? { ...item, packed: !item.packed } : item
+    );
+    setItems(updatedItems);
+  };
 
-      if (updatedItem.packed) {
-        return { ...updatedItem, packed: true };
-      } else {
-        return { ...updatedItem, packed: false };
-      }
-    }
-    return item;
-  });
+  // Functie om alle items uit de 'PackingItemsList' te verwijderen
+  const removePackingItems = () => {
+    setItems(items.filter((item) => item.packed)); // Verwijder alle niet-ingepakte items
+  };
 
-
-  setItems(updatedItems);
-};
-
-
-
+  // Functie om alle items uit de 'PackedItemsList' te verwijderen
+  const removePackedItems = () => {
+    setItems(items.filter((item) => !item.packed)); // Verwijder alle ingepakte items
+  };
 
   const areFiltersApplied = !selectedCategory;
 
@@ -65,15 +62,19 @@ function App() {
           />
         </div>
         <div className="grid grid-cols-2 gap-4 mt-12 transition">
+          {/* PackingItemsList */}
           <PackingItemsList
             items={items.filter((item) => !item.packed)}
             setItems={setItems}
             onTogglePacked={handleTogglePacked}
+            removePackingItems={removePackingItems} // Doorgeven van functie om items te verwijderen
           />
+          {/* PackedItemsList */}
           <PackedItemsList
             items={items.filter((item) => item.packed)}
             setItems={setItems}
             onTogglePacked={handleTogglePacked}
+            removePackedItems={removePackedItems} // Doorgeven van functie om items te verwijderen
           />
         </div>
       </div>
@@ -82,6 +83,7 @@ function App() {
 }
 
 export default App;
+
 
 
 

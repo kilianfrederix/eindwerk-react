@@ -3,7 +3,7 @@ import PackingCategory from "./PackingCategory";
 import PackingHeader from "./PackingHeader";
 import PackingItems from "./PackingItems";
 
-export default function PackingItemsList({ items, setItems, areFiltersApplied, onTogglePacked }) {
+export default function PackingItemsList({ items, setItems, areFiltersApplied, onTogglePacked, removePackingItems }) {
 
     const [selectedCategory , setSelectedCategory] = useState('');
 
@@ -15,14 +15,6 @@ export default function PackingItemsList({ items, setItems, areFiltersApplied, o
         setSelectedCategory(''); 
     };
 
-    const handleRemoveAllItems = () => {
-        const filteredItems = items.filter((item) => item.packed);
-        console.log('Filtered Items:', filteredItems);
-        setItems(filteredItems);
-    };
-
-
-
     const filteredItems = selectedCategory
     ? items.filter((item) => item.category === selectedCategory)
     : items;
@@ -30,7 +22,7 @@ export default function PackingItemsList({ items, setItems, areFiltersApplied, o
     return (
         <div>
             <PackingHeader 
-                onRemoveAllItems={handleRemoveAllItems}
+                removePackingItems={removePackingItems}
                 onClearFilters={handleClearFilters}
                 areFiltersApplied={areFiltersApplied}
             />
