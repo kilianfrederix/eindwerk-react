@@ -1,9 +1,7 @@
-export default function PackingItems({ items, setItems, onTogglePacked }) {
-
+export default function PackingItems({ items, setItems, onTogglePacked, removeitem }) {
     const handleRemoveItem = (itemId) => {
-        const updatedItems = items.filter((item) => item.id !== itemId);
-        setItems(updatedItems);
-    };
+        removeitem(itemId);
+    }
 
     return (
         <ul className="grid gap-2">

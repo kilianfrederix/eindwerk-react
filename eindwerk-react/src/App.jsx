@@ -39,6 +39,11 @@ function App() {
     setItems(items.filter((item) => !item.packed)); 
   };
 
+  const handleRemoveItem = (itemId) => {
+    const updatedItems = items.filter((item) => item.id !== itemId);
+    setItems(updatedItems);
+  };
+
   const areFiltersApplied = !selectedCategory;
 
   return (
@@ -61,12 +66,14 @@ function App() {
             items={items.filter((item) => !item.packed)}
             setItems={setItems}
             onTogglePacked={handleTogglePacked}
+            removeitem={handleRemoveItem}
             removePackingItems={removePackingItems}
           />
           <PackedItemsList
             items={items.filter((item) => item.packed)}
             setItems={setItems}
             onTogglePacked={handleTogglePacked}
+            removeitem={handleRemoveItem}
             removePackedItems={removePackedItems}
           />
         </div>

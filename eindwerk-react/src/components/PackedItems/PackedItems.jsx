@@ -1,9 +1,8 @@
 import React from 'react';
 
-export default function PackedItems({ items, setItems, onTogglePacked }) {
+export default function PackedItems({ items, setItems, onTogglePacked, removeitem }) {
   const handleRemoveItem = (itemId) => {
-    const updatedItems = items.filter((item) => item.id !== itemId);
-    setItems(updatedItems);
+    removeitem(itemId);
   };
 
   return (

@@ -3,7 +3,7 @@ import PackingCategory from "./PackingCategory";
 import PackingHeader from "./PackingHeader";
 import PackingItems from "./PackingItems";
 
-export default function PackingItemsList({ items, setItems, areFiltersApplied, onTogglePacked, removePackingItems }) {
+export default function PackingItemsList({ items, setItems, areFiltersApplied, onTogglePacked, removePackingItems, removeitem }) {
 
     const [selectedCategory , setSelectedCategory] = useState('');
 
@@ -35,6 +35,7 @@ export default function PackingItemsList({ items, setItems, areFiltersApplied, o
                 items={filteredItems}
                 setItems={setItems}
                 onTogglePacked={onTogglePacked}
+                removeitem={removeitem}
             />
         </div>
     )
