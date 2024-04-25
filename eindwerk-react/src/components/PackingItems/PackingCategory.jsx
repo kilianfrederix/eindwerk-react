@@ -35,7 +35,6 @@ export default function PackingCategory ({items, onSelectedcategory }) {
                         {category}
                     </button>
                 ))}
-                
         </div>
     )
 }
