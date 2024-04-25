@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function PackedHeader({ onClearFilters, areFiltersApplied, removePackedItems }) {
   const handleRemoveItems = () => {
-    removePackedItems(); // Roep de functie aan om alle ingepakte items te verwijderen
+    removePackedItems();
   };
 
   return (
