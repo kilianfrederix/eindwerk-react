@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function PackedCategory({ items, onSelectedCategory }) {
     const uniqueCategories = [...new Set(items.map((item) => item.category))];
 

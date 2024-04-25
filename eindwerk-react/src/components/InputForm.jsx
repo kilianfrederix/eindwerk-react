@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function InputForm({ itemName, setItemName, onAddItem }) {
   const handleChange = (e) => {
     setItemName(e.target.value);

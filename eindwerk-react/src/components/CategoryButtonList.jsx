@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function CategoryButtonList({ onSelectedCategory, items }) {
     const [selectedCategory, setSelectedCategory] = useState('');
