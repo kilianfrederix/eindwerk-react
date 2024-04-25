@@ -1,4 +1,4 @@
-export default function PackingItems({ items, setItems, onTogglePacked, removeitem }) {
+export default function PackingItems({ items, onTogglePacked, removeitem }) {
     const handleRemoveItem = (itemId) => {
         removeitem(itemId);
     }
