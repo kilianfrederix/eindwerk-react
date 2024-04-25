@@ -25,6 +25,7 @@ export default function PackedItemsList({ items, setItems, areFiltersApplied, on
         removePackedItems={removePackedItems}
         onClearFilters={handleClearFilters}
         areFiltersApplied={areFiltersApplied}
+        items={items}
       />
 
       <PackedCategory

@@ -1,8 +1,8 @@
-import React from 'react';
-
-export default function PackingHeader({ onClearFilters, areFiltersApplied, removePackingItems }) {
+export default function PackingHeader({ onClearFilters, areFiltersApplied, removePackingItems, items }) {
   const handleRemoveItems = () => {
-    removePackingItems();
+    if (items.some((item) => !item.packed)) {
+      removePackingItems();
+    }
   };
 
   return (
@@ -10,17 +10,16 @@ export default function PackingHeader({ onClearFilters, areFiltersApplied, remov
       <h2 className="font-bold text-2xl">Items to pack</h2>
       <div className="flex gap-2">
         <button
-          className="bg-blue-500 text-blue-100 rounded-lg px-2 py-1"
+          className={`bg-blue-500 text-blue-100 rounded-lg px-2 py-1 ${items.some((item) => item.packed) ? '' : 'disabled:opacity-50 disabled:cursor-not-allowed'}`}
           onClick={handleRemoveItems}
+          disabled={!items.some((item) => !item.packed)}
         >
           Remove all items
         </button>
         <button
-          className={`bg-indigo-500 text-indigo-100 rounded-lg px-2 py-1 ${
-            areFiltersApplied ? '' : 'disabled:opacity-50 disabled:cursor-not-allowed'
-          }`}
+          className={`bg-indigo-500 text-indigo-100 rounded-lg px-2 py-1 ${areFiltersApplied ? '' : 'disabled:opacity-50 disabled:cursor-not-allowed'}`}
           onClick={onClearFilters}
-          disabled={areFiltersApplied}
+          disabled={areFiltersApplied || items.length === 0}
         >
           Clear filters
         </button>

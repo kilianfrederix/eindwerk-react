@@ -25,6 +25,7 @@ export default function PackingItemsList({ items, setItems, areFiltersApplied, o
                 removePackingItems={removePackingItems}
                 onClearFilters={handleClearFilters}
                 areFiltersApplied={areFiltersApplied}
+                items={items}
             />
 
 
