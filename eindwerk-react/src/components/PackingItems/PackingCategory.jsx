@@ -1,11 +1,10 @@
-export default function PackingCategory ({ onSelectedcategory }) {
+export default function PackingCategory ({items, onSelectedcategory }) {
+
+    const uniqueCategories = [...new Set(items.map((item) => item.category))];
 
     const handleCategoryClick = (category) => {
         onSelectedcategory(category);
     };
-
-    
-
 
     return (
         <div
@@ -25,34 +24,18 @@ export default function PackingCategory ({ onSelectedcategory }) {
             >
                 <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
             </svg>
-                <button
-                    type="button"
-                    className="transition-all px-4 py-1 rounded-full text-sm bg-neutral-300 hover:bg-neutral-400/70"
-                    onClick={() => handleCategoryClick('Documents')}
-                >
-                    Documents
-                </button>
-                <button
-                    type="button"
-                    className="transition-all px-4 py-1 rounded-full text-sm bg-neutral-300 hover:bg-neutral-400/70"
-                    onClick={() => handleCategoryClick('Clothes')}
-                >
-                    Clothes
-                </button>
-                <button
-                    type="button"
-                    className="transition-all px-4 py-1 rounded-full text-sm bg-neutral-300 hover:bg-neutral-400/70"
-                    onClick={() => handleCategoryClick('Camping gear')}
-                >
-                    Camping gear
-                </button>
-                <button
-                    type="button"
-                    className="transition-all px-4 py-1 rounded-full text-sm bg-neutral-300 hover:bg-neutral-400/70"
-                    onClick={() => handleCategoryClick('Toiletry')}
-                >
-                    Toiletry
-                </button>
+                {uniqueCategories.map((category) => (
+                    <button
+                    key={category}
+                        type="button"
+                        className="transition-all px-4 py-1 rounded-full text-sm bg-neutral-300 hover:bg-neutral-400/70"
+                        onClick={() => handleCategoryClick(category)}
+                        disabled={!items.some((item) => item.category === category)}
+                    >
+                        {category}
+                    </button>
+                ))}
+                
         </div>
     )
 }

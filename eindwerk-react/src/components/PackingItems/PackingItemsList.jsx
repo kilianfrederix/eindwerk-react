@@ -13,7 +13,7 @@ export default function PackingItemsList({ items, setItems, areFiltersApplied, o
 
     const handleClearFilters = () => {
         setSelectedCategory(''); 
-    };
+    }; 
 
     const filteredItems = selectedCategory
     ? items.filter((item) => item.category === selectedCategory)
@@ -29,6 +29,7 @@ export default function PackingItemsList({ items, setItems, areFiltersApplied, o
 
 
             <PackingCategory 
+                items={items}
                 onSelectedcategory={handleSelectCategory}
             />
             <PackingItems 
